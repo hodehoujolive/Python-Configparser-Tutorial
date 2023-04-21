@@ -28,10 +28,12 @@ pip install selenium
 ```
 
 Install the latest version of WebDriver for the browser you want to use. You can download the WebDriver for the following commonly used browsers:
+
     - Firefox: GeckoDriver
     - Chrome: ChromeDriver
     - Opera: OperaDriver
     - Edge: Microsoft Edge WebDriver
+    
     Make sure you have the correct version for your browser, otherwise it won't work.
 
 ## Usage
