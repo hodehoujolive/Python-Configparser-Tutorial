@@ -14,7 +14,7 @@ This is a simple automation script written in Python using the ConfigParser libr
 
 Clone the repository to your local machine:
 ```
-git clone https://github.com/hodehoujolive/GenerateXMLTestReport.git
+git clone https://github.com/hodehoujolive/python-configparser-sample
 ```
 
 Make sure you have python installed. If not, install python
