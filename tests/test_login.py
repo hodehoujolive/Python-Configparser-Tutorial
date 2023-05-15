@@ -1,56 +1,51 @@
 import unittest
 from selenium import webdriver
 from pages.login_page import LoginPage
-from utils.config_reader import read_config
-import time
-
+from utils.config_reader import read_config, read_config_section
+import time , json
+#from selenium.webdriver.chrome.options import Options as ChromeOptions
+from selenium.webdriver.edge.options import Options as EdgeOptions
 
 class TestLogin(unittest.TestCase):
     
     def setUp(self):
-    
-        lambdatest_username = read_config('LAMBDATEST', 'username')
-        lambdatest_access_key = read_config('LAMBDATEST', 'access_key')
+        browser_os_list = read_config_section('BROWSER_OS_LIST')
+        self.drivers = []
+        for browser_os in browser_os_list.values():
 
-        if lambdatest_username and lambdatest_access_key:
-            desired_caps = {
-                'LT:Options': {
-                    "build": "Python ConfigParser Tutorial",
-                    "name": "Python ConfigParser Tutorial",
-                    "platformName": "Windows 11",
-                    "selenium_version": "4.0.0",
-                    "console": 'true', 
-                    "network": 'true',
-                },
-                "browserName": "firefox",
-                "browserVersion": "latest",
+            lt_options = {
+            "user": read_config('LAMBDATEST', 'username'),
+            "accessKey": read_config('LAMBDATEST', 'access_key'),
+            "build": "Python Configparser Tutorial",
+            "name": "Python Configparser Tutorial",
+            "platformName": json.loads(browser_os)["platformName"],
+            "w3c": True,
+            "browserName": json.loads(browser_os)["browserName"],
+            "browserVersion": json.loads(browser_os)["browser_Version"],
+            "selenium_version": "4.8.0"
             }
 
-            self.driver = webdriver.Remote(
-                command_executor="http://{}:{}@hub.lambdatest.com/wd/hub".format(
-                    lambdatest_username, lambdatest_access_key),
-                desired_capabilities=desired_caps)
-        else:
-            browser_name = read_config('BROWSER', 'name')
-            if browser_name.lower() == 'chrome':
-                self.driver = webdriver.Chrome()
-            elif browser_name.lower() == 'firefox':
-                self.driver = webdriver.Firefox()
-            elif browser_name.lower() == 'edge':
-                self.driver = webdriver.Edge()
-            else:
-                raise ValueError('Invalid browser name')
+            browser_options = EdgeOptions()
+            browser_options.set_capability('LT:Options', lt_options)
+            
+            driver = webdriver.Remote(
+                command_executor="http://hub.lambdatest.com:80/wd/hub",
+                options=browser_options)
 
-        self.driver.get(read_config('WEBSITE', 'url'))
-        self.driver.maximize_window()
+            driver.get(read_config('WEBSITE', 'url'))
+            driver.maximize_window()
+            self.drivers.append(driver)
 
+    
     def tearDown(self):
-        self.driver.quit()
+        for driver in self.drivers:
+            driver.quit()
 
     def test_login(self):
-        login_page = LoginPage(self.driver)
-        login_page.login()
-        time.sleep(10)
+        for driver in self.drivers:
+            login_page = LoginPage(driver)
+            login_page.login()
+            time.sleep(10)
 
 if __name__ == '__main__':
-       unittest.main()
+    unittest.main()
