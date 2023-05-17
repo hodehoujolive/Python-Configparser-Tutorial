@@ -18,7 +18,7 @@ class LoginPage:
 
     @property
     def submit_button(self):
-        return self.wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="content"]/div/div[2]/div/div/form/input[1]')))
+        return self.wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@value='Login']")))
 
     def login(self):
         self.email.send_keys(read_config('LOGIN', 'email'))
