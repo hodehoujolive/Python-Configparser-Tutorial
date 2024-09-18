@@ -1,18 +1,15 @@
 # Python ConfigParser Tutorial
 
-- Use Case 1: Storing URL and Login Credentials
-The project demonstrates how to store the URL and login credentials in a configuration file using configparser.
+- Use Case 1: Store the URL and login credentials in a configuration file using configparser.
 
-- Use Case 2: Managing Testing on Different Environments
-Configparser is utilized to manage testing on different environments.
+- Use Case 2: Manage testing on different environments with Configparser.
 
-- Use Case 3: Browser Management through Configuration
-The project exemplifies how to manage the browser configuration for tests using configparser
+- Use Case 3: Manage the browser configuration for tests using configparser
 
-- Use Case 4: Parallel Testing on LambdaTest
-By leveraging the power of configparser, the project demonstrates parallel testing on the LambdaTest cloud platform.
+- Use Case 4: Parallel testing on the LambdaTest cloud platform with configparser.
 
 With these use cases, this project serves as a comprehensive guide for utilizing configparser to manage configurations in a Selenium testing framework. The modular and flexible approach presented here ensures efficient test maintenance and scalability, empowering testers to focus on developing robust test scripts with minimal configuration overhead.
+
 ## Table of Contents
 
 * [Installation](#installation)
@@ -67,7 +64,3 @@ The ```test_config.ini``` file contains the configuration parameters for the scr
 ## Contributing
 
 If you find any issues or have suggestions for improvements, feel free to submit a pull request or create an issue in the repository.
-
-## License
-
-This project is licensed under the MIT License
