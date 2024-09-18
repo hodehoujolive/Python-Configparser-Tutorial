@@ -16,7 +16,6 @@ With these use cases, this project serves as a comprehensive guide for utilizing
 * [Usage](#usage)
 * [Configuration](#configuration)
 * [Contributing](#contributing)
-* [License](#license)
 
 ## Installation
 
